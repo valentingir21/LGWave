@@ -1,5 +1,5 @@
 .hero {
-  background: var(--bg-deep);
+  background: var(--bg-section);
   min-height: 100vh;
   display: flex;
   align-items: center;
