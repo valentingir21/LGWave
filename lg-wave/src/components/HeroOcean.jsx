@@ -167,11 +167,10 @@ const fragmentShader = `
     /* ── Film grain ──────────────────────────────────────────────────── */
     color += (hash(vUv + fract(uTime * 0.07)) - 0.5) * 0.015;
 
-    /* ── Alpha : fade haut + bords latéraux ──────────────────────────── */
-    float alpha = smoothstep(0.5, 0.9, vUv.y)           /* fade en haut  */
-                * smoothstep(0.0, 0.06, vUv.x)          /* bord gauche   */
-                * smoothstep(1.0, 0.94, vUv.x)          /* bord droit    */
-                * smoothstep(0.0, 0.02, vUv.y);         /* near (tiny)   */
+    /* ── Alpha : bords latéraux uniquement — le fog gère l'horizon ──── */
+    float alpha = smoothstep(0.0, 0.06, vUv.x)
+                * smoothstep(1.0, 0.94, vUv.x)
+                * smoothstep(0.0, 0.04, vUv.y);
 
     gl_FragColor = vec4(color * 1.1, alpha);
   }

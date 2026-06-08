@@ -16,7 +16,7 @@ body {
   font-size: var(--text-base);
   font-weight: var(--weight-regular);
   color: var(--black);
-  background: var(--white);
+  background: var(--bg-section);
   line-height: var(--leading-normal);
 }
 

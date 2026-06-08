@@ -32,20 +32,10 @@ export default function Hero() {
 
   useEffect(() => attachMagneticField(ctaRef.current, { radius: 80, strength: 0.45 }), [])
 
-  // Scroll-out transition: ocean glides down, content fades up
+  // Scroll-out: hero content fades up (canvas is fixed, no parallax needed)
   useEffect(() => {
     if (reduceMotion) return undefined
     const ctx = gsap.context(() => {
-      gsap.to(heroOceanRef.current, {
-        y: 60,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: 'top top',
-          end: '+=30%',
-          scrub: 0.8,
-        },
-      })
       gsap.to(heroContentRef.current, {
         opacity: 0,
         y: -20,
