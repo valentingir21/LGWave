@@ -71,6 +71,7 @@ function buildSequenceTimeline(refs, { letterOffsetL, letterOffsetG }) {
 export default function Intro({ onComplete }) {
   const rootRef = useRef(null)
   const videoRef = useRef(null)
+  const entranceRef = useRef(null)
   const overlayWhiteRef = useRef(null)
   const overlayBlueRef = useRef(null)
   const letterLRef = useRef(null)
@@ -203,6 +204,12 @@ export default function Intro({ onComplete }) {
     video.playbackRate = PLAYBACK_RATE
     video.play()?.catch(bail)
 
+    /* Fade the white entrance overlay once the video can actually play,
+       so there's no black flash while the asset is buffering on Vercel. */
+    const fadeEntrance = () => gsap.to(entranceRef.current, { opacity: 0, duration: 0.6, ease: 'power2.out' })
+    video.addEventListener('canplay', fadeEntrance, { once: true })
+    const entranceFallback = setTimeout(fadeEntrance, 1500)
+
     /* Bounded safety net — if the 16s mark never arrives (autoplay refused,
        decode stall, network hiccup…) the cinematic must still resolve
        instead of stranding the visitor on a frozen frame. */
@@ -211,6 +218,8 @@ export default function Intro({ onComplete }) {
     return () => {
       cleanup()
       ctx.revert()
+      clearTimeout(entranceFallback)
+      video.removeEventListener('canplay', fadeEntrance)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reduceMotion])
@@ -239,7 +248,7 @@ export default function Intro({ onComplete }) {
 
   return (
     <div className="intro" ref={rootRef}>
-      <div className="intro-entrance" aria-hidden="true" />
+      <div className="intro-entrance" ref={entranceRef} aria-hidden="true" />
       <video
         ref={videoRef}
         className="intro-video"

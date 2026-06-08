@@ -24,12 +24,8 @@
   inset: 0;
   z-index: 8;
   background: #ffffff;
-  animation: introEntranceFade 0.9s ease-out forwards;
   pointer-events: none;
-}
-@keyframes introEntranceFade {
-  from { opacity: 1; }
-  to   { opacity: 0; }
+  /* opacity controlled by GSAP on video canplay event */
 }
 
 /* ── Phase 2 : flash blanc — l'éclaboussure "explose" ── */
