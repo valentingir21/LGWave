@@ -1,0 +1,37 @@
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 9999;
+  will-change: transform;
+}
+
+.cursor-dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border-radius: var(--radius-full);
+  background: var(--white);
+  mix-blend-mode: difference;
+  transform: scale(1);
+  transition: transform 0.4s var(--ease-cinematic);
+}
+.cursor-dot.is-hovering {
+  transform: scale(2.5);
+}
+
+/* The custom cursor replaces the native one only while active */
+html.cursor-active,
+html.cursor-active * {
+  cursor: none !important;
+}
+
+@media (max-width: 880px), (pointer: coarse) {
+  .cursor { display: none; }
+}

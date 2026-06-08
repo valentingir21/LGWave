@@ -1,0 +1,152 @@
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9998; /* one below the persistent magnetic cursor (9999) so it stays visible */
+  background: #000; /* deliberate pure black — masks the first video frame while it loads */
+  overflow: hidden;
+}
+
+/* ── Phase 1 : la vidéo source, plein écran ── */
+.intro-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* ── Phase 2 : flash blanc — l'éclaboussure "explose" ── */
+.intro-overlay-white {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: #ffffff;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Phase 3 : fond bleu marine du site ── */
+.intro-overlay-blue {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: #06172e;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Phases 4-7 : LG / Wave / baseline, empilés et centrés ── */
+.intro-stage {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+}
+.intro-letters {
+  position: relative; /* anchor — L and G are centred on this single point, then split apart */
+  height: clamp(120px, 18vw, 220px); /* reserves the glyph box so Wave/baseline flow below it instead of through it */
+}
+.intro-letter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-family: var(--font-display);
+  font-size: clamp(120px, 18vw, 220px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  opacity: 0;
+}
+.intro-wave {
+  display: block;
+  margin-top: 0.3em;
+  font-family: var(--font-heading);
+  font-size: clamp(40px, 6vw, 90px);
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  color: var(--blue-sky);
+  opacity: 0;
+  transform: translateY(15px);
+}
+.intro-wave-curve {
+  display: block;
+  height: 26px;
+  margin-top: 0.5em;
+}
+.intro-wave-curve-svg {
+  display: block;
+  height: 100%;
+  width: auto;
+}
+.intro-baseline {
+  margin-top: 2em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4em;
+  max-width: 640px;
+  padding: 0 var(--space-6);
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.8vw, 20px);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: var(--white-60);
+}
+.intro-baseline-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+/* ── Skip ── */
+.intro-skip {
+  position: absolute;
+  z-index: 10;
+  bottom: 2rem;
+  right: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-full);
+  color: rgba(255, 255, 255, 0.5);
+  font-family: var(--font-heading);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.6rem 1.2rem;
+  opacity: 0.6;
+  transition: opacity 0.3s ease, border-color 0.3s ease;
+}
+.intro-skip:hover,
+.intro-skip:focus-visible {
+  opacity: 1;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 640px) {
+  .intro-skip {
+    right: 1.5rem;
+    bottom: 1.5rem;
+    font-size: 11px;
+    padding: 0.5rem 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-video,
+  .intro-overlay-white,
+  .intro-overlay-blue {
+    display: none;
+  }
+}

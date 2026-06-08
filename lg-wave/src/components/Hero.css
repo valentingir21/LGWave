@@ -1,0 +1,225 @@
+.hero {
+  background: var(--bg-deep);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Three.js shader ocean — full-bleed living backdrop ── */
+.hero-ocean {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-ocean-canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  will-change: transform;
+}
+
+/* Mobile / reduced-motion fallback — the brief's animated wave gradient, CSS-only */
+@keyframes oceanDrift {
+  0%   { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+.hero-ocean-fallback {
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-wave);
+  background-size: 200% 200%;
+  animation: oceanDrift 36s ease-in-out infinite alternate;
+  will-change: background-position;
+}
+
+/* Marine vignette — keeps text legible over the shader plane at the edges */
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(0deg, var(--bg-deep) 0%, transparent 55%),
+    linear-gradient(100deg, rgba(4,22,40,0.92) 0%, rgba(4,22,40,0.5) 45%, transparent 70%),
+    linear-gradient(180deg, rgba(4,22,40,0.6) 0%, transparent 35%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-ocean-fallback { animation: none; }
+}
+
+/* ── Content block — anchored bottom-left, never centered ── */
+.hero-content {
+  position: absolute;
+  z-index: 2;
+  left: 8%;
+  right: 8%;
+  top: 15%;
+}
+
+.hero-eyebrow {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--white-60);
+  margin-bottom: var(--space-5);
+  opacity: 0;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--blue-sky);
+  margin-right: var(--space-3);
+  vertical-align: middle;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(44px, 5.5vw, 100px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  text-shadow:
+    0 2px 8px rgba(4, 22, 40, 1),
+    0 4px 32px rgba(4, 22, 40, 0.95),
+    0 8px 80px rgba(4, 22, 40, 0.85);
+  margin-bottom: var(--space-6);
+}
+.hero-title .word {
+  display: inline-block;
+  white-space: nowrap;
+}
+.hero-title .char {
+  display: inline-block;
+  will-change: transform, filter, opacity;
+}
+.hero-title .line-blue {
+  color: var(--blue-sky);
+}
+.hero-title .line-white {
+  color: var(--white);
+}
+
+.hero-tags {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-7);
+  opacity: 0;
+}
+.hero-tag {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--white-60);
+  border: 1px solid var(--white-20);
+  border-radius: 100px;
+  padding: 8px 18px;
+}
+
+.hero-cta-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  opacity: 0;
+}
+
+/* Magnetic CTA — transparent, blue-sky border, deep→ocean fill sweeps in on hover */
+.hero-cta-magnetic {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  background: transparent;
+  color: var(--white);
+  border: 1px solid var(--blue-sky);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wide);
+  padding: 17px 34px;
+  cursor: pointer;
+  will-change: transform;
+}
+.hero-cta-fill {
+  position: absolute;
+  inset: 0;
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: linear-gradient(100deg, var(--bg-deep), var(--blue-ocean));
+  transition: transform 0.4s var(--ease-cinematic);
+  z-index: 0;
+}
+.hero-cta-magnetic:hover .hero-cta-fill {
+  transform: scaleX(1);
+}
+.hero-cta-label {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* ── Scroll indicator — pulsing vertical line, anchored bottom-right ── */
+.hero-scroll {
+  position: absolute;
+  z-index: 2;
+  right: var(--container-padding);
+  bottom: var(--space-7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+.hero-scroll-line {
+  width: 1px;
+  height: 56px;
+  background: linear-gradient(180deg, rgba(91,157,232,0.05), var(--blue-sky), rgba(91,157,232,0.05));
+  background-size: 100% 240%;
+  animation: scrollPulse 2.6s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%   { background-position: 0 0%; }
+  100% { background-position: 0 100%; }
+}
+.hero-scroll-text {
+  font-family: var(--font-heading);
+  font-size: 10px;
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--white-60);
+  writing-mode: vertical-rl;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-scroll-line { animation: none; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .hero-content {
+    left: 6%;
+    right: 6%;
+    top: 12%;
+  }
+  .hero-scroll { display: none; }
+}
+
+@media (max-width: 640px) {
+  .hero-content { bottom: 14%; }
+  .hero-tags { flex-wrap: wrap; }
+  .hero-cta-row { flex-direction: column; align-items: flex-start; gap: var(--space-4); }
+}

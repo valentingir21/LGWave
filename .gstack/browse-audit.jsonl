@@ -1,0 +1,7 @@
+{"ts":"2026-06-05T22:12:24.072Z","cmd":"viewport","args":"1440x900","origin":"about:blank","durationMs":5,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-06-05T22:12:24.158Z","cmd":"goto","args":"http://localhost:5173","origin":"http://localhost:5173/","durationMs":52,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-06-05T22:12:24.219Z","cmd":"js","args":"document.getElementById('realisations').scrollIntoView()","origin":"http://localhost:5173/","durationMs":2,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-06-05T22:12:24.253Z","cmd":"js","args":"document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'))","origin":"http://localhost:5173/","durationMs":1,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-06-05T22:12:26.335Z","cmd":"screenshot","args":"/tmp/lg-video-mockup.png --clip 0,0,1440,600","origin":"http://localhost:5173/","durationMs":45,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-06-05T22:12:56.023Z","cmd":"js","args":"const v = document.querySelector('.browser-video'); if(v){ v.currentTime = 5; }","origin":"http://localhost:5173/","durationMs":1,"status":"ok","hasCookies":false,"mode":"launched"}
+{"ts":"2026-06-05T22:12:57.101Z","cmd":"screenshot","args":"/tmp/lg-video-5s.png --clip 280,55,1150,420","origin":"http://localhost:5173/","durationMs":30,"status":"ok","hasCookies":false,"mode":"launched"}

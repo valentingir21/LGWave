@@ -1,0 +1,114 @@
+.reassurance {
+  background: var(--bg-deep);
+  position: relative;
+  overflow: hidden;
+}
+
+.reassurance::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(91,157,232,0.06) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+
+.reassurance-header {
+  margin-bottom: var(--space-9);
+}
+
+.section-label-light {
+  color: var(--blue-sky);
+}
+
+.section-title-light {
+  color: var(--white);
+}
+
+.reassurance-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-5);
+  position: relative;
+  z-index: 1;
+}
+
+.reassurance-card {
+  --spot-color: rgba(91,157,232,0.18);
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--white-20);
+  border-radius: var(--radius-xl);
+  padding: var(--space-7) var(--space-6);
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+.reassurance-card:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(91,157,232,0.32);
+}
+.reassurance-card:hover .spotlight { opacity: 1; }
+
+.reassurance-icon {
+  width: 44px;
+  height: 44px;
+  background: rgba(91,157,232,0.12);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--blue-sky);
+  margin-bottom: var(--space-5);
+}
+
+.reassurance-title {
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+  color: var(--white);
+  margin-bottom: var(--space-3);
+  line-height: var(--leading-snug);
+}
+
+.reassurance-body {
+  font-size: var(--text-base);
+  color: rgba(255,255,255,0.5);
+  line-height: var(--leading-normal);
+  font-weight: var(--weight-light);
+}
+
+.reassurance-stat {
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 0.5px solid rgba(255,255,255,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.reassurance-stat-value {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--blue-sky);
+  line-height: 1;
+}
+
+.reassurance-stat-label {
+  font-size: var(--text-xs);
+  color: rgba(255,255,255,0.3);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .reassurance-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 540px) {
+  .reassurance-grid {
+    grid-template-columns: 1fr;
+  }
+}

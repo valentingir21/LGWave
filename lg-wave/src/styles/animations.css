@@ -1,0 +1,139 @@
+/* Reveal au scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Stagger delays */
+.stagger-1 { transition-delay: 0s; }
+.stagger-2 { transition-delay: 0.1s; }
+.stagger-3 { transition-delay: 0.2s; }
+.stagger-4 { transition-delay: 0.3s; }
+.stagger-5 { transition-delay: 0.4s; }
+
+/* Hero animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Dot grid pulse */
+@keyframes dotPulse {
+  0%, 100% { opacity: 0.04; }
+  50%       { opacity: 0.12; }
+}
+
+/* Line fill */
+@keyframes lineFill {
+  from { height: 0; }
+  to   { height: 100%; }
+}
+
+/* Scale in */
+@keyframes scaleIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+/* Text clip reveal */
+.text-reveal {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+}
+.text-reveal.visible {
+  clip-path: inset(0 0% 0 0);
+}
+
+/* Counter animate */
+.counter-value {
+  display: inline-block;
+  transition: all 0.1s;
+}
+
+/* Hero word animation */
+.hero-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.hero-word.animated {
+  animation: fadeUp 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Navbar transition — transparent over the hero, blurred marine once scrolled past it */
+.navbar-scrolled {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(6, 23, 46, 0.85) !important;
+  border-bottom-color: var(--white-20) !important;
+}
+
+/* ───────────────────────────────────────────────────────────
+   Cinematic utilities
+   ─────────────────────────────────────────────────────────── */
+
+/* Aurora gradient mesh — slow-drifting ambient light, GPU-only props */
+@keyframes auroraDrift {
+  0%   { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+  50%  { transform: translate3d(2%, -3%, 0) scale(1.08) rotate(6deg); }
+  100% { transform: translate3d(-3%, 2%, 0) scale(1.04) rotate(-5deg); }
+}
+
+.aurora {
+  position: absolute;
+  inset: -15%;
+  pointer-events: none;
+  filter: blur(70px);
+  will-change: transform;
+  animation: auroraDrift 26s ease-in-out infinite alternate;
+  background:
+    radial-gradient(ellipse 46% 38% at 28% 24%, rgba(91,157,232,0.20), transparent 62%),
+    radial-gradient(ellipse 38% 48% at 76% 64%, rgba(26,95,168,0.18), transparent 65%),
+    radial-gradient(ellipse 34% 42% at 52% 92%, rgba(91,157,232,0.10), transparent 60%);
+}
+
+/* Cursor-following spotlight overlay — pair with attachTilt() which sets
+   --spot-x/--spot-y, and toggle opacity on :hover from the host rule */
+.spotlight {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  background: radial-gradient(
+    circle var(--spot-size) at var(--spot-x, 50%) var(--spot-y, 50%),
+    var(--spot-color, rgba(91,157,232,0.16)),
+    transparent 70%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora { animation: none; }
+}
