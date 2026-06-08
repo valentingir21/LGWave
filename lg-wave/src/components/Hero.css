@@ -34,6 +34,18 @@
   will-change: background-position;
 }
 
+/* Fade bottom — dissolves the wave into the next section's background */
+.hero-fade-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(to bottom, transparent 0%, #06172e 100%);
+  pointer-events: none;
+  z-index: 3;
+}
+
 /* Marine vignette — keeps text legible over the shader plane at the edges */
 .hero-vignette {
   position: absolute;

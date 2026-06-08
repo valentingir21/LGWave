@@ -28,12 +28,12 @@ const pillars = [
 
 const pillarsStagger = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
+  show: { transition: { staggerChildren: 0.12 } },
 }
 
 const pillarsCard = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] } },
 }
 
 function PillarCard({ pillar }) {
@@ -63,17 +63,17 @@ export default function Pillars() {
             className="section-label section-label-light"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
-            viewport={{ once: true, amount: 0.4 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.5 }}
           >
             Transformation
           </motion.span>
           <motion.h2
             className="section-title section-title-light pillars-title"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 35 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.25, 0.1, 0.25, 1], delay: 0.1 }}
-            viewport={{ once: true, amount: 0.4 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
           >
             La vague digitale qui transforme votre business
           </motion.h2>
@@ -81,8 +81,8 @@ export default function Pillars() {
             className="section-subtitle section-subtitle-light"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 }}
-            viewport={{ once: true, amount: 0.4 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
           >
             La plupart des entreprises n'ont pas un problème de travail — elles ont un problème d'outils.
             On part de vos blocages réels, et on construit ce qui les résout.
@@ -93,7 +93,7 @@ export default function Pillars() {
           className="pillars-grid"
           variants={pillarsStagger}
           initial="hidden"
-          whileInView="visible"
+          whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
         >
           {pillars.map((p, i) => (
