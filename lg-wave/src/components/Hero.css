@@ -4,13 +4,16 @@
   display: flex;
   align-items: center;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }
 
 /* ── Three.js shader ocean — full-bleed living backdrop ── */
 .hero-ocean {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: -150px;
   z-index: 0;
 }
 .hero-ocean-canvas {
