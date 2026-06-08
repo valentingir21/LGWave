@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Suspense, lazy } from 'react'
 import { initSmoothScroll } from './lib/cinematic'
+import { useMediaQuery } from './hooks/useMediaQuery'
 import Intro from './components/Intro'
 import Cursor from './components/Cursor'
 import Navbar from './components/Navbar'
@@ -14,10 +15,16 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
 
+const HeroOcean = lazy(() => import('./components/HeroOcean'))
+
 export default function App() {
   const [introComplete, setIntroComplete] = useState(
     () => sessionStorage.getItem('introSeen') === 'true'
   )
+
+  const canRenderOcean = useMediaQuery('(min-width: 880px) and (pointer: fine)')
+  const reduceMotion   = useMediaQuery('(prefers-reduced-motion: reduce)')
+  const showOcean      = canRenderOcean && !reduceMotion
 
   useEffect(() => {
     if (!introComplete) return undefined
@@ -30,6 +37,17 @@ export default function App() {
 
   return (
     <>
+      {/* Fixed ocean canvas — page-level background, always behind all sections */}
+      <div className="hero-ocean" aria-hidden="true">
+        {showOcean ? (
+          <Suspense fallback={null}>
+            <HeroOcean />
+          </Suspense>
+        ) : (
+          <div className="hero-ocean-fallback" />
+        )}
+      </div>
+
       {!introComplete && <Intro onComplete={() => setIntroComplete(true)} />}
 
       <Cursor />

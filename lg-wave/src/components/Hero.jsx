@@ -1,22 +1,17 @@
-import { useEffect, useRef, Suspense, lazy } from 'react'
+import { useEffect, useRef } from 'react'
 import { ArrowRight } from 'lucide-react'
 import { gsap, attachMagneticField } from '../lib/cinematic'
 import { useSplitReveal } from '../hooks/useSplitReveal'
 import { useMediaQuery } from '../hooks/useMediaQuery'
 import './Hero.css'
 
-const HeroOcean = lazy(() => import('./HeroOcean'))
-
 export default function Hero() {
   const heroRef        = useRef(null)
-  const heroOceanRef   = useRef(null)
   const heroContentRef = useRef(null)
   const ctaRef         = useRef(null)
   const titleRef       = useSplitReveal({ stagger: 0.035, delay: 0.35 })
 
-  const canRenderOcean = useMediaQuery('(min-width: 880px) and (pointer: fine)')
-  const reduceMotion   = useMediaQuery('(prefers-reduced-motion: reduce)')
-  const showOcean      = canRenderOcean && !reduceMotion
+  const reduceMotion = useMediaQuery('(prefers-reduced-motion: reduce)')
 
   // CTA entrance animation
   useEffect(() => {
@@ -58,16 +53,6 @@ export default function Hero() {
 
   return (
     <section className="hero" id="home" ref={heroRef}>
-      <div className="hero-ocean" ref={heroOceanRef} aria-hidden="true">
-        {showOcean ? (
-          <Suspense fallback={<div className="hero-ocean-fallback" />}>
-            <HeroOcean />
-          </Suspense>
-        ) : (
-          <div className="hero-ocean-fallback" />
-        )}
-      </div>
-
       <div className="hero-vignette" aria-hidden="true" />
 
       <div className="hero-content" ref={heroContentRef}>
