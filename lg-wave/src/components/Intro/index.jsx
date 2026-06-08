@@ -239,6 +239,7 @@ export default function Intro({ onComplete }) {
 
   return (
     <div className="intro" ref={rootRef}>
+      <div className="intro-entrance" aria-hidden="true" />
       <video
         ref={videoRef}
         className="intro-video"

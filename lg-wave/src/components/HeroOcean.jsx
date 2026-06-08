@@ -233,7 +233,7 @@ export default function HeroOcean() {
       gl={{ antialias: true, alpha: false, powerPreference: 'high-performance' }}
       camera={{ position: [0, 1.1, 5.2], fov: 42 }}
     >
-      <color attach="background" args={['#06172e']} />
+      <color attach="background" args={['#081d3a']} />
       <fog attach="fog" args={[0x06172e, 8, 20]} />
       <Suspense fallback={null}>
         <OceanSurface />

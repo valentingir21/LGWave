@@ -13,7 +13,7 @@
   top: 0;
   left: 0;
   right: 0;
-  bottom: -150px;
+  bottom: -320px;
   z-index: 0;
 }
 .hero-ocean-canvas {
@@ -38,16 +38,6 @@
 }
 
 /* Fade bottom — dissolves the wave into the next section's background */
-.hero-fade-bottom {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 250px;
-  background: linear-gradient(to bottom, transparent 0%, #081d3a 100%);
-  pointer-events: none;
-  z-index: 10;
-}
 
 /* Marine vignette — keeps text legible over the shader plane at the edges */
 .hero-vignette {
@@ -56,7 +46,6 @@
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(0deg, var(--bg-deep) 0%, transparent 55%),
     linear-gradient(100deg, rgba(4,22,40,0.92) 0%, rgba(4,22,40,0.5) 45%, transparent 70%),
     linear-gradient(180deg, rgba(4,22,40,0.6) 0%, transparent 35%);
 }

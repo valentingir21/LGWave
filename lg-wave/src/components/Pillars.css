@@ -1,5 +1,5 @@
 .pillars {
-  background: linear-gradient(to bottom, transparent 0px, var(--bg-section) 160px);
+  background: linear-gradient(to bottom, transparent 0px, var(--bg-section) 320px);
   border-bottom: 1px solid var(--white-20);
   position: relative;
   z-index: 1;

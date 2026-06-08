@@ -101,7 +101,6 @@ export default function Hero() {
         <span className="hero-scroll-text">Scroll</span>
       </div>
 
-      <div className="hero-fade-bottom" aria-hidden="true" />
     </section>
   )
 }
