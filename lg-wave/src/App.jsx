@@ -21,10 +21,11 @@ export default function App() {
 
   useEffect(() => {
     if (!introComplete) return undefined
-    // Lenis is driven by gsap.ticker so every ScrollTrigger stays in sync
-    // with the smoothed scroll position (see src/lib/cinematic.js). Held back
-    // until the intro hands off — no scroll engine should run under a locked body.
-    return initSmoothScroll()
+    const cleanup = initSmoothScroll()
+    // Force Framer Motion to re-evaluate whileInView observers now that the
+    // layout is stable and Lenis has taken over scroll.
+    window.dispatchEvent(new Event('resize'))
+    return cleanup
   }, [introComplete])
 
   return (
