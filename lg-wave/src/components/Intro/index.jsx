@@ -5,11 +5,10 @@ import { useMediaQuery } from '../../hooks/useMediaQuery'
 import './intro.css'
 
 const BASELINE_WORDS = 'La vague digitale qui transforme votre business'.split(' ')
-const ZOOM_TRIGGER_TIME = 16
-/* Playing at 4× so Phase 1 (video → zoom trigger) lasts exactly 4s real time
-   (16s source ÷ 4 = 4s). The spray/cut choreography is unchanged — still
-   triggered at the 16s mark of the source. */
-const PLAYBACK_RATE = 4.0
+const ZOOM_TRIGGER_TIME = 11
+/* First 5s trimmed from the source, so the spray/cut moment is now at 11s.
+   Playback at 1.8× → Phase 1 lasts ~6s real time. */
+const PLAYBACK_RATE = 1.8
 
 /**
  * Phases 2 → 8 — one continuous timeline, started once the source video
@@ -207,7 +206,7 @@ export default function Intro({ onComplete }) {
     /* Bounded safety net — if the 16s mark never arrives (autoplay refused,
        decode stall, network hiccup…) the cinematic must still resolve
        instead of stranding the visitor on a frozen frame. */
-    const guard = setTimeout(advance, 8000)
+    const guard = setTimeout(advance, 20000)
 
     return () => {
       cleanup()
