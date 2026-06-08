@@ -1,3 +1,4 @@
 *.mov
 VideoIntro.mp4
+!lg-wave/public/videos/VideoIntro.mp4
 node_modules/
